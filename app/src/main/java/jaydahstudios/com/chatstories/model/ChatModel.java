@@ -8,9 +8,9 @@ public class ChatModel {
     public int id;
     public String chatActor;
     public String chatMessage;
-    public boolean isSend;
+    public int isSend;
 
-    public ChatModel(int id, String chatActor, String chatMessage, boolean isSend) {
+    public ChatModel(int id, String chatActor, String chatMessage, int isSend) {
         this.id = id;
         this.chatActor = chatActor;
         this.chatMessage = chatMessage;
@@ -41,11 +41,11 @@ public class ChatModel {
         this.chatMessage = chatMessage;
     }
 
-    public boolean isSend() {
+    public int isSend() {
         return isSend;
     }
 
-    public void setSend(boolean send) {
+    public void setSend(int send) {
         isSend = send;
     }
 }

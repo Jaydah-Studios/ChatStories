@@ -1,15 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+
     <com.github.library.bubbleview.BubbleTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
         android:id="@+id/bubbleChat"
         android:text=""
-        android:padding="10dp"
+        android:paddingTop="22dp"
+        android:paddingRight="10dp"
+        android:paddingLeft="10dp"
+        android:paddingBottom="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginEnd="10dp"
         android:textColor="@android:color/white"
@@ -26,12 +32,15 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
         android:id="@+id/nameChat"
         android:textSize="12sp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginStart="15dp"
-        android:text="sfsjkd"
-        android:textColor="#949494"
+        android:textColor="#cce1ef"
+        android:paddingTop="5dp"
+        android:layout_marginLeft="18dp"
+        android:layout_marginStart="18dp"
+        android:text=""
         />
 
-</LinearLayout>
+</RelativeLayout>

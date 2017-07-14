@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
 
 //    private ListView lvProduct;
 //    private List<ChatModel> lstChat;
-    private int count = 0;
+    private int count = 1;
 
     private CustomAdapter adapter;
     private DatabaseHelper mDBHelper;
@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
             mDBHelper.getReadableDatabase();
             //Copy db
             if(copyDatabase(this)){
-                Toast.makeText(this, "Database copy success", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "All ready. Press Next to start!", Toast.LENGTH_LONG).show();
             }else{
                 Toast.makeText(this, "Copy error", Toast.LENGTH_LONG).show();
             }
@@ -88,10 +88,8 @@ public class MainActivity extends AppCompatActivity {
     private void setUpMessage(){
         Log.d(TAG, "setUpMessage: Exec");
 
-//        if(lstChat == null){
-            lstChat = mDBHelper.getListChat();
 
-//        }
+        lstChat = mDBHelper.getListChat(count);
     }
 
     public void nextClicked(View view){
@@ -108,24 +106,23 @@ public class MainActivity extends AppCompatActivity {
 //        lstChat.remove(count);
 //        count++;
 
+//        for(ChatModel chat : lstChat) { newChat.add(chat); break; }
+//        Iterator<ChatModel> it = lstChat.iterator();
+//        while(it.hasNext()){
+//            newChat.add(it.next());
+//            it.remove();
+//            break;
+//        }
 
-
-        for(ChatModel chat : lstChat) { newChat.add(chat); break; }
-        Iterator<ChatModel> it = lstChat.iterator();
-        while(it.hasNext()){
-            newChat.add(it.next());
-            it.remove();
-            break;
-        }
-
-        Log.i(TAG, "nextClicked: "+lstChat.size());
+//        Log.i(TAG, "nextClicked: "+lstChat.size());
 //        lstChat.size();
 //        System.out.println(lstChat.size());
 
         final ListView lstView = (ListView)findViewById(R.id.listView);
-        CustomAdapter adapter = new CustomAdapter(newChat,this);
+        CustomAdapter adapter = new CustomAdapter(lstChat,this);
         lstView.setAdapter(adapter);
 
+        count++;
         adapter.notifyDataSetChanged();
 
         lstView.post(new Runnable(){

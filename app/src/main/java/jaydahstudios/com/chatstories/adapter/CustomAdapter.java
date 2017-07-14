@@ -47,10 +47,10 @@ public class CustomAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View vi = convertView;
-        if(convertView ==null){
-            if(lstChat.get(position).isSend())
+        if(convertView == null ){
+            if(lstChat.get(position).isSend() == 0)
                 vi=inflater.inflate(R.layout.list_send,null);
-            else
+            else if ((lstChat.get(position).isSend() == 1))
                 vi=inflater.inflate(R.layout.list_recv,null);
         }
 
