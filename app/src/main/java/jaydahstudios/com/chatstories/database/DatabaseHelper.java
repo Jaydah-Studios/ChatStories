@@ -50,10 +50,10 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         }
     }
 
-    public List<ChatModel> getListChat(int id) {
+    public ChatModel getListChat(int id) {
 
         ChatModel chat = null;
-        List<ChatModel> chatModel = new ArrayList<>();
+//        List<ChatModel> chatModel = new ArrayList<>();
         openDatabase();
         Cursor cursor = mDatabase.rawQuery("SELECT b.id, a.actorName, b.dialogueContent ,a.actorPlacement FROM actors a LEFT JOIN dialogue b ON a.id = b.actorId WHERE b.id ="+id+" ORDER BY b.id", null);
 
@@ -64,13 +64,14 @@ public class DatabaseHelper extends SQLiteOpenHelper{
 
             chat = new ChatModel(cursor.getInt(0), cursor.getString(1), cursor.getString(2),  cursor.getInt(3));
             //        lstChat.add(new ChatModel("id","actor","message","true for left | false for right"));
-            chatModel.add(chat);
+//            chatModel.add(chat);
             cursor.moveToNext();
         }
         cursor.close();
         closeDatabase();
 
-        return chatModel;
+        return chat;
+//        return chatModel;
     }
 
     public ChatModel getChat(int id){

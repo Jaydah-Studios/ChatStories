@@ -34,14 +34,12 @@ public class MainActivity extends AppCompatActivity {
     private List<ChatModel> lstChat = new ArrayList<>();
     private List<ChatModel> newChat = new ArrayList<>();
 
-    
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-//        lvProduct = (ListView) findViewById(R.id.listview_product);
         mDBHelper = new DatabaseHelper(this);
 
         //Checks if DB exists
@@ -85,45 +83,23 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void setUpMessage(){
+    private ChatModel setUpMessage(){
         Log.d(TAG, "setUpMessage: Exec");
-
-
-        lstChat = mDBHelper.getListChat(count);
+        return mDBHelper.getListChat(count);
     }
 
     public void nextClicked(View view){
-
         Log.d(TAG, "nextClicked: Is Clicked");
-        setUpMessage();
 
-//        for(ChatModel chat : lstChat)
-//        {
-//            newChat.add(chat);
-//            break;
-//        }
-//
-//        lstChat.remove(count);
-//        count++;
-
-//        for(ChatModel chat : lstChat) { newChat.add(chat); break; }
-//        Iterator<ChatModel> it = lstChat.iterator();
-//        while(it.hasNext()){
-//            newChat.add(it.next());
-//            it.remove();
-//            break;
-//        }
-
-//        Log.i(TAG, "nextClicked: "+lstChat.size());
-//        lstChat.size();
-//        System.out.println(lstChat.size());
+        ChatModel chat = setUpMessage();
+        lstChat.add(chat);
 
         final ListView lstView = (ListView)findViewById(R.id.listView);
         CustomAdapter adapter = new CustomAdapter(lstChat,this);
         lstView.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
 
         count++;
-        adapter.notifyDataSetChanged();
 
         lstView.post(new Runnable(){
             public void run() {
