@@ -67,6 +67,8 @@ public class DatabaseHelper extends SQLiteOpenHelper{
                 boolOfChat = false;
             }
 
+            System.out.println(cursor.getInt(3));
+
             chat = new ChatModel(cursor.getInt(0), cursor.getString(1), cursor.getString(2), true);
             //        lstChat.add(new ChatModel("id","actor","message","true for left | false for right"));
             chatModel.add(chat);
@@ -76,6 +78,25 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         closeDatabase();
 
         return chatModel;
+    }
+
+    public ChatModel getChat(int id){
+        ChatModel chat = null;
+        openDatabase();
+        Cursor cursor = mDatabase.rawQuery("SELECT b.id, a.actorName, b.dialogueContent ,a.actorPlacement FROM actors a LEFT JOIN dialogue b ON a.id = b.actorId WHERE b.id = 2 ORDER BY b.id ASC", null);
+
+        while(!cursor.moveToNext()){
+            if(cursor.getInt(3) == '0'){
+                boolOfChat = true;
+            }else{
+                boolOfChat = false;
+            }
+            chat = new ChatModel(cursor.getInt(0), cursor.getString(1), cursor.getString(2), true);
+        }
+        cursor.close();
+        closeDatabase();
+
+        return chat;
     }
 
     }

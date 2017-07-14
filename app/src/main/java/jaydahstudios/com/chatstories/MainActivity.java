@@ -13,6 +13,7 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import jaydahstudios.com.chatstories.adapter.CustomAdapter;
@@ -21,14 +22,17 @@ import jaydahstudios.com.chatstories.model.ChatModel;
 
 public class MainActivity extends AppCompatActivity {
 
+
     private static final String TAG = "MainActivity";
 
 //    private ListView lvProduct;
 //    private List<ChatModel> lstChat;
+    private int count = 0;
 
     private CustomAdapter adapter;
     private DatabaseHelper mDBHelper;
     private List<ChatModel> lstChat = new ArrayList<>();
+    private List<ChatModel> newChat = new ArrayList<>();
 
     
     @Override
@@ -38,19 +42,19 @@ public class MainActivity extends AppCompatActivity {
 
 
 //        lvProduct = (ListView) findViewById(R.id.listview_product);
-//        mDBHelper = new DatabaseHelper(this);
-//
-//        //Checks if DB exists
-//        File database =  getApplicationContext().getDatabasePath(DatabaseHelper.DBNAME);
-//        if(!database.exists()){
-//            mDBHelper.getReadableDatabase();
-//            //Copy db
-//            if(copyDatabase(this)){
-//                Toast.makeText(this, "Database copy success", Toast.LENGTH_LONG).show();
-//            }else{
-//                Toast.makeText(this, "Copy error", Toast.LENGTH_LONG).show();
-//            }
-//        }
+        mDBHelper = new DatabaseHelper(this);
+
+        //Checks if DB exists
+        File database =  getApplicationContext().getDatabasePath(DatabaseHelper.DBNAME);
+        if(!database.exists()){
+            mDBHelper.getReadableDatabase();
+            //Copy db
+            if(copyDatabase(this)){
+                Toast.makeText(this, "Database copy success", Toast.LENGTH_LONG).show();
+            }else{
+                Toast.makeText(this, "Copy error", Toast.LENGTH_LONG).show();
+            }
+        }
 
 ////        Get product list in db when db exists
 //        chatModelList = mDBHelper.getListProduct();
@@ -83,24 +87,11 @@ public class MainActivity extends AppCompatActivity {
 
     private void setUpMessage(){
         Log.d(TAG, "setUpMessage: Exec");
-        mDBHelper = new DatabaseHelper(this);
 
-        //Checks if DB exists
-        File database =  getApplicationContext().getDatabasePath(DatabaseHelper.DBNAME);
-        if(!database.exists()){
-            mDBHelper.getReadableDatabase();
-            //Copy db
-            if(copyDatabase(this)){
-                Toast.makeText(this, "Database copy success", Toast.LENGTH_LONG).show();
-            }else{
-                Toast.makeText(this, "Copy error", Toast.LENGTH_LONG).show();
-            }
-        }
+//        if(lstChat == null){
+            lstChat = mDBHelper.getListChat();
 
-        lstChat = mDBHelper.getListChat();
-//        Get product list in db when db exists
-//        lstChat.add(new ChatModel("Eric: Hello!", true));
-
+//        }
     }
 
     public void nextClicked(View view){
@@ -108,9 +99,34 @@ public class MainActivity extends AppCompatActivity {
         Log.d(TAG, "nextClicked: Is Clicked");
         setUpMessage();
 
+//        for(ChatModel chat : lstChat)
+//        {
+//            newChat.add(chat);
+//            break;
+//        }
+//
+//        lstChat.remove(count);
+//        count++;
+
+
+
+        for(ChatModel chat : lstChat) { newChat.add(chat); break; }
+        Iterator<ChatModel> it = lstChat.iterator();
+        while(it.hasNext()){
+            newChat.add(it.next());
+            it.remove();
+            break;
+        }
+
+        Log.i(TAG, "nextClicked: "+lstChat.size());
+//        lstChat.size();
+//        System.out.println(lstChat.size());
+
         final ListView lstView = (ListView)findViewById(R.id.listView);
-        CustomAdapter adapter = new CustomAdapter(lstChat,this);
+        CustomAdapter adapter = new CustomAdapter(newChat,this);
         lstView.setAdapter(adapter);
+
+        adapter.notifyDataSetChanged();
 
         lstView.post(new Runnable(){
             public void run() {
