@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
             }
             outputStream.flush();
             outputStream.close();
-            Log.w("MainActivity", "DB copied");
+            Log.w("MainActivity", "DB copied successfully");
             return true;
 
         }catch (Exception e){
