@@ -111,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
 
         lstView.post(new Runnable(){
             public void run() {
-                lstView.setSelection(lstView.getCount() - 1);
+                lstView.setSelection(lstView.getCount());
             }});
     }
     
@@ -128,26 +128,22 @@ public class MainActivity extends AppCompatActivity {
 
         lstView.post(new Runnable(){
             public void run() {
-                lstView.setSelection(lstView.getCount() - 1);
+                lstView.setSelection(lstView.getCount());
             }});
     }
 
     private void checkSharedPreferences(){
         //Check if user has read to a point and has been saved from previous
-//        int counter = mPreferences.getInt("CounterSP", 1);
         int counter = mPreferences.getInt(getString(R.string.story_progress_count), 1);
 
         if(counter != 1){
             count = counter;
-            Log.i(TAG, "PCounter is: "+counter);
         }
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-
-//        mEditor.putInt("CounterSP", count);
         mEditor.putInt(getString(R.string.story_progress_count), count);
         mEditor.commit();
     }

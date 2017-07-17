@@ -4,11 +4,14 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import jaydahstudios.com.chatstories.model.ChatModel;
+
+import static android.content.ContentValues.TAG;
 
 /**
  * Created by Jaystiqs on 7/13/2017.
@@ -53,25 +56,22 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     public ChatModel getListChat(int id) {
 
         ChatModel chat = null;
-//        List<ChatModel> chatModel = new ArrayList<>();
         openDatabase();
         Cursor cursor = mDatabase.rawQuery("SELECT b.id, a.actorName, b.dialogueContent ,a.actorPlacement FROM actors a LEFT JOIN dialogue b ON a.id = b.actorId WHERE b.id ="+id+" ORDER BY b.id", null);
 
         cursor.moveToFirst();
 //        cursor.moveToNext();
         while (!cursor.isAfterLast()) {
-            System.out.println(cursor.getInt(3));
+            System.out.println(cursor.getInt(0) + " " + cursor.getInt(1) + " " + cursor.getInt(2) + " " +  cursor.getInt(3));
 
             chat = new ChatModel(cursor.getInt(0), cursor.getString(1), cursor.getString(2),  cursor.getInt(3));
-            //        lstChat.add(new ChatModel("id","actor","message","true for left | false for right"));
-//            chatModel.add(chat);
+
             cursor.moveToNext();
         }
         cursor.close();
         closeDatabase();
 
         return chat;
-//        return chatModel;
     }
 
     public ChatModel getChat(int id){

@@ -52,13 +52,32 @@ public class CustomAdapter extends BaseAdapter {
                 vi=inflater.inflate(R.layout.list_send,null);
             else if ((lstChat.get(position).isSend() == 1))
                 vi=inflater.inflate(R.layout.list_recv,null);
+            else if ((lstChat.get(position).isSend() == 2))
+                vi=inflater.inflate(R.layout.list_mid,null);
+
+        }else{
+            if(lstChat.get(position).isSend() == 0)
+                vi=inflater.inflate(R.layout.list_send,null);
+            else if ((lstChat.get(position).isSend() == 1))
+                vi=inflater.inflate(R.layout.list_recv,null);
+            else if ((lstChat.get(position).isSend() == 2))
+                vi=inflater.inflate(R.layout.list_mid,null);
         }
 
-        BubbleTextView bubbleTextView = (BubbleTextView) vi.findViewById(R.id.bubbleChat);
-        bubbleTextView.setText(lstChat.get(position).chatMessage);
-        TextView nameTextView = (TextView) vi.findViewById(R.id.nameChat);
-        nameTextView.setText(lstChat.get(position).chatActor);
+        if(lstChat.get(position).isSend() !=0 || lstChat.get(position).isSend() !=1 ||  lstChat.get(position).isSend() !=2 ){
+            BubbleTextView bubbleTextView = (BubbleTextView) vi.findViewById(R.id.bubbleChat);
+            if(bubbleTextView != null)
+                bubbleTextView.setText(lstChat.get(position).chatMessage);
+            TextView nameTextView = (TextView) vi.findViewById(R.id.nameChat);
+            if(nameTextView != null)
+                nameTextView.setText(lstChat.get(position).chatActor);
+        }else{
+            vi=inflater.inflate(R.layout.list_mid,null);
+            BubbleTextView bubbleTextView = (BubbleTextView) vi.findViewById(R.id.bubbleChat);
+            bubbleTextView.setText("THE END");
+        }
 
         return vi;
     }
+
 }
