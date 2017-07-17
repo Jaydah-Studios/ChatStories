@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.github.library.bubbleview.BubbleTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/bubbleChat"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:text=""
+        android:paddingTop="10dp"
+        android:paddingRight="5dp"
+        android:paddingLeft="5dp"
+        android:paddingBottom="15dp"
+        android:textColor="#a3a3a3"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="25dp"
+        app:arrowWidth="0dp"
+        app:angle="8dp"
+        app:arrowHeight="0dp"
+        app:arrowPosition="14dp"
+        app:arrowLocation="top"
+        app:bubbleColor="#303030"
+        app:arrowCenter="true"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/nameChat"
+        android:textSize="12sp"
+        android:textColor="#ffffff"
+        android:paddingTop="0dp"
+        android:paddingBottom="5dp"
+        android:text=""
+        />
+</RelativeLayout>
+
+<!--<TextView-->
+<!--android:layout_width="wrap_content"-->
+<!--android:layout_height="wrap_content"-->
+<!--android:id="@+id/midChat"-->
+<!--android:textSize="12sp"-->
+<!--android:textColor="#949494"-->
+<!--android:paddingTop="5dp"-->
+<!--android:padding="5dp"-->
+<!--android:background="#f1f3f5"-->
+<!--android:text=""-->
+<!--android:gravity="center"-->
+<!--android:layout_alignParentTop="true"-->
+<!--android:layout_centerHorizontal="true"-->
+<!--android:layout_marginTop="12dp" />-->
