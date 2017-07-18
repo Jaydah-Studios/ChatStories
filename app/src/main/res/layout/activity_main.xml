@@ -39,7 +39,7 @@
 
             <Button
                 android:layout_width="match_parent"
-                android:layout_height="58dp"
+                android:layout_height="65dp"
                 android:text="Next"
                 android:onClick="nextClicked"
                 android:layout_marginTop="2dp"
@@ -48,6 +48,7 @@
                 android:layout_marginBottom="5dp"/>
 
         </LinearLayout>
+
 
     </LinearLayout>
 </RelativeLayout>

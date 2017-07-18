@@ -1,12 +1,16 @@
 package jaydahstudios.com.chatstories;
 
+
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.DataSetObserver;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AbsListView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -97,22 +101,39 @@ public class MainActivity extends AppCompatActivity {
     public void nextClicked(View view){
         Log.d(TAG, "nextClicked: Is Clicked");
 
+        final int limit = 100;
+
+        if(count == limit){
+            Log.d(TAG, "nextClicked: Limit Reached");
+
+            Intent intent = new Intent(MainActivity.this, PromoOptionsActivity.class);
+            startActivity(intent);
+
+        }else{
+            loadList(null);
+        }
+
+    }
+
+    public void loadList(View view){
         ChatModel chat = setUpMessage();
         lstChat.add(chat);
-
         final ListView lstView = (ListView)findViewById(R.id.listView);
-        CustomAdapter adapter = new CustomAdapter(lstChat,this);
+        final CustomAdapter adapter = new CustomAdapter(lstChat,this);
+        lstView.setTranscriptMode(AbsListView.TRANSCRIPT_MODE_ALWAYS_SCROLL);
         lstView.setAdapter(adapter);
+
+        adapter.registerDataSetObserver(new DataSetObserver() {
+            @Override
+            public void onChanged() {
+                super.onChanged();
+                lstView.setSelection(adapter.getCount() - 1);
+            }
+        });
+
         adapter.notifyDataSetChanged();
-
         Log.i(TAG, "Counter is: "+count);
-
         count++;
-
-        lstView.post(new Runnable(){
-            public void run() {
-                lstView.setSelection(lstView.getCount());
-            }});
     }
     
     public void getProgress(View view){
@@ -122,14 +143,20 @@ public class MainActivity extends AppCompatActivity {
         lstChat.add(chat);
 
         final ListView lstView = (ListView)findViewById(R.id.listView);
-        CustomAdapter adapter = new CustomAdapter(lstChat,this);
+        final CustomAdapter adapter = new CustomAdapter(lstChat,this);
+        lstView.setTranscriptMode(AbsListView.TRANSCRIPT_MODE_ALWAYS_SCROLL);
         lstView.setAdapter(adapter);
+
+        adapter.registerDataSetObserver(new DataSetObserver() {
+            @Override
+            public void onChanged() {
+                super.onChanged();
+                lstView.setSelection(adapter.getCount() - 1);
+            }
+        });
+
         adapter.notifyDataSetChanged();
 
-        lstView.post(new Runnable(){
-            public void run() {
-                lstView.setSelection(lstView.getCount());
-            }});
     }
 
     private void checkSharedPreferences(){
