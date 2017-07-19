@@ -4,14 +4,59 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#6d6c70"
+    android:background="@drawable/optionsback"
     tools:context="jaydahstudios.com.chatstories.MainActivity">
 
+
+
+    <!--<android.support.v7.widget.Toolbar-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="?attr/actionBarSize"-->
+        <!--android:background="#000"/>-->
+    <!--<TextView-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:text="EPIC CHAT STORIES"-->
+    <!--android:textColor="#e6e6e6"/>-->
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#212121">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="EPIC CHAT STORIES"
+                android:textSize="15sp"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginLeft="10dp"
+                android:textColor="#e6e6e6"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="This story : Damsel"
+                android:textSize="12sp"
+                android:layout_marginTop="30dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginLeft="10dp"
+                android:fontFamily="sans-serif-smallcaps"
+                android:textColor="#e6e6e6"/>
+        </RelativeLayout>
+
+    </LinearLayout>
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginTop="41dp">
 
         <ListView
             android:layout_width="match_parent"
@@ -27,7 +72,7 @@
             android:dividerHeight="0dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:listSelector="#6d6c70">
+            android:listSelector="@android:color/transparent">
 
         </ListView>
 
@@ -35,7 +80,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:background="#6d6c70">
+            android:background="@android:color/transparent">
 
             <Button
                 android:layout_width="match_parent"
